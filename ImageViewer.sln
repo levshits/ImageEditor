@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageViewer", "ImageViewer\ImageViewer.csproj", "{F4930EE7-7207-4A89-876A-FC3BDBD530D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageLibrary", "ImageLibrary\ImageLibrary.csproj", "{20C87794-7DA7-4382-BCBB-EB6DE0F834B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageViewerWinForms", "ImageViewerWinForms\ImageViewerWinForms.csproj", "{019B89F6-BFA9-4380-9D9B-6A1E4BD5744A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F4930EE7-7207-4A89-876A-FC3BDBD530D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4930EE7-7207-4A89-876A-FC3BDBD530D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4930EE7-7207-4A89-876A-FC3BDBD530D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4930EE7-7207-4A89-876A-FC3BDBD530D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{20C87794-7DA7-4382-BCBB-EB6DE0F834B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{20C87794-7DA7-4382-BCBB-EB6DE0F834B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{20C87794-7DA7-4382-BCBB-EB6DE0F834B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{20C87794-7DA7-4382-BCBB-EB6DE0F834B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{019B89F6-BFA9-4380-9D9B-6A1E4BD5744A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{019B89F6-BFA9-4380-9D9B-6A1E4BD5744A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{019B89F6-BFA9-4380-9D9B-6A1E4BD5744A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{019B89F6-BFA9-4380-9D9B-6A1E4BD5744A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
