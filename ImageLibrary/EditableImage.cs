@@ -4,6 +4,8 @@ using System.Drawing;
 using System.Runtime.CompilerServices;
 using AForge.Imaging.Filters;
 using ImageLibrary.Annotations;
+using ImageLibrary.Filters;
+using IFilter = ImageLibrary.Filters.IFilter;
 
 namespace ImageLibrary
 {
@@ -12,6 +14,7 @@ namespace ImageLibrary
         private Bitmap _sourceImage;
         private Bitmap _imageView;
         private String _path;
+        private ComplementFilter filter;
 
         public Bitmap ImageView
         {
@@ -38,31 +41,28 @@ namespace ImageLibrary
             _sourceImage = new Bitmap(path);
             _path = path;
             ImageView = _sourceImage;
+            filter = new ComplementFilter();
         }
 
         public void ChangeBrightness(int brightness)
         {
-            _imageView = _sourceImage.Clone(
-                new Rectangle(0, 0, _sourceImage.Width, _sourceImage.Height),
-                _sourceImage.PixelFormat);
-            for (int i = 0; i < _imageView.Width; i++)
-            {
-                for (int j = 0; j < _imageView.Height; j++)
-                {
-                    Color color = _sourceImage.GetPixel(i, j);
-                    _sourceImage.SetPixel(i, j, color);
-                }
-            }
+            IFilter f = new BrightnessFilter(brightness);
+            filter.AddOrUpdateFilter(f);
+            ImageView = filter.Apply(_sourceImage);
         }
 
         public void ChangeContrast(int contrast)
         {
-            BrightnessCorrection filter = new BrightnessCorrection();
-            filter.Apply(_sourceImage);
+            IFilter f = new ContrastFilter(contrast);
+            filter.AddOrUpdateFilter(f);
+            ImageView = filter.Apply(_sourceImage);
         }
 
-        public void ChangeSaturation(float saturation)
+        public void ChangeSaturation(int saturation)
         {
+            IFilter f = new SaturationFilter(saturation);
+            filter.AddOrUpdateFilter(f);
+            ImageView = filter.Apply(_sourceImage);
         }
 
         public bool IsChanged()

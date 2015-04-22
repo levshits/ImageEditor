@@ -52,6 +52,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EditableImage.cs" />
+    <Compile Include="Filters\AbstractFilter.cs" />
+    <Compile Include="Filters\BrightnessFilter.cs" />
+    <Compile Include="Filters\ColorFilter.cs" />
+    <Compile Include="Filters\ComplementFilter.cs" />
+    <Compile Include="Filters\ContrastFilter.cs" />
+    <Compile Include="Filters\IFilter.cs" />
+    <Compile Include="Filters\SaturationFilter.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
