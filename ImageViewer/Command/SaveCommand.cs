@@ -18,7 +18,10 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            _viewModel.Image.Save();
+            if (_viewModel.Image != null)
+            {
+                _viewModel.Image.Save();
+            }
         }
 
         public event EventHandler CanExecuteChanged;

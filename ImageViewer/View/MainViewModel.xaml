@@ -17,8 +17,8 @@
         <Menu IsMainMenu="True" VerticalAlignment="Top" Height="23">
             <MenuItem Header="File">
                 <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
-                <MenuItem Header="Save" Command="{Binding SaveCommand}"/>
-                <MenuItem Header="Save as" Command="{Binding SaveAsCommand}"/>
+                <MenuItem Header="Save" Command="{Binding SaveCommand, UpdateSourceTrigger=Default}"/>
+                <MenuItem Header="Save as" Command="{Binding SaveAsCommand, UpdateSourceTrigger=PropertyChanged}"/>
                 <MenuItem Header="Close" Command="{Binding CloseCommand}"/>
             </MenuItem>
         </Menu>

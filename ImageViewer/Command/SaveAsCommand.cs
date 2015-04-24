@@ -25,11 +25,14 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.ShowDialog();
-            if (!File.Exists(saveFileDialog.FileName))
+            if (_viewModel.Image != null)
             {
-                _viewModel.Image.Save(saveFileDialog.FileName);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.ShowDialog();
+                if (!File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
+                {
+                    _viewModel.Image.Save(saveFileDialog.FileName);
+                }
             }
         }
 

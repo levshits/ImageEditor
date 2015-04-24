@@ -68,16 +68,22 @@ namespace ImageViewerWinForms
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _image.Save();
+            if (_image != null)
+            {
+                _image.Save();
+            }
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.ShowDialog();
-            if (!System.IO.File.Exists(saveFileDialog.FileName))
+            if (_image != null)
             {
-                _image.Save(saveFileDialog.FileName);
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.ShowDialog();
+                if (!System.IO.File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
+                {
+                    _image.Save(saveFileDialog.FileName);
+                }
             }
         }
 
