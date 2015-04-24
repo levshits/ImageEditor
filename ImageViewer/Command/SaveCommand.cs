@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Microsoft.Win32;
 
 namespace ImageViewer.Command
 {
@@ -17,7 +18,7 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            _viewModel.Image.Save();
         }
 
         public event EventHandler CanExecuteChanged;

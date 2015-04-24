@@ -45,13 +45,14 @@
             this.ZoomOut = new System.Windows.Forms.Button();
             this.ZoomIn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.BlueLevel = new System.Windows.Forms.TrackBar();
             this.GreenLevel = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.saturationLevel = new System.Windows.Forms.TrackBar();
             this.ImageBox = new ImageViewerWinForms.ZoomAndPanImageBox();
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RedLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.contrastLevel)).BeginInit();
@@ -61,13 +62,13 @@
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BlueLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.File,
-            this.aboutToolStripMenuItem});
+            this.File});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(706, 24);
@@ -88,32 +89,35 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 53);
+            this.label1.Location = new System.Drawing.Point(23, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 2;
@@ -122,7 +126,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 117);
+            this.label2.Location = new System.Drawing.Point(23, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 3;
@@ -131,7 +135,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 181);
+            this.label3.Location = new System.Drawing.Point(23, 206);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 4;
@@ -139,24 +143,39 @@
             // 
             // RedLevel
             // 
+            this.RedLevel.LargeChange = 20;
             this.RedLevel.Location = new System.Drawing.Point(26, 3);
+            this.RedLevel.Maximum = 255;
+            this.RedLevel.Minimum = -255;
             this.RedLevel.Name = "RedLevel";
             this.RedLevel.Size = new System.Drawing.Size(104, 38);
+            this.RedLevel.SmallChange = 10;
             this.RedLevel.TabIndex = 5;
+            this.RedLevel.ValueChanged += new System.EventHandler(this.ColorLevel_ValueChanged);
             // 
             // contrastLevel
             // 
-            this.contrastLevel.Location = new System.Drawing.Point(19, 133);
+            this.contrastLevel.LargeChange = 20;
+            this.contrastLevel.Location = new System.Drawing.Point(19, 110);
+            this.contrastLevel.Maximum = 255;
+            this.contrastLevel.Minimum = -255;
             this.contrastLevel.Name = "contrastLevel";
             this.contrastLevel.Size = new System.Drawing.Size(104, 45);
+            this.contrastLevel.SmallChange = 10;
             this.contrastLevel.TabIndex = 6;
+            this.contrastLevel.ValueChanged += new System.EventHandler(this.contrastLevel_ValueChanged);
             // 
             // brightnessLevel
             // 
-            this.brightnessLevel.Location = new System.Drawing.Point(19, 69);
+            this.brightnessLevel.LargeChange = 20;
+            this.brightnessLevel.Location = new System.Drawing.Point(19, 62);
+            this.brightnessLevel.Maximum = 255;
+            this.brightnessLevel.Minimum = -255;
             this.brightnessLevel.Name = "brightnessLevel";
             this.brightnessLevel.Size = new System.Drawing.Size(104, 45);
+            this.brightnessLevel.SmallChange = 10;
             this.brightnessLevel.TabIndex = 7;
+            this.brightnessLevel.ValueChanged += new System.EventHandler(this.brightnessLevel_ValueChanged);
             // 
             // tableLayoutPanel1
             // 
@@ -175,6 +194,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.saturationLevel);
             this.groupBox1.Controls.Add(this.ZoomOut);
             this.groupBox1.Controls.Add(this.ZoomIn);
             this.groupBox1.Controls.Add(this.tableLayoutPanel2);
@@ -221,7 +242,7 @@
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.BlueLevel, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.GreenLevel, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 197);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 222);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -229,15 +250,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(154, 132);
             this.tableLayoutPanel2.TabIndex = 13;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 44);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(15, 13);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "G";
             // 
             // label4
             // 
@@ -247,6 +259,15 @@
             this.label4.Size = new System.Drawing.Size(15, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "R";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(3, 44);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(15, 13);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "G";
             // 
             // label5
             // 
@@ -259,17 +280,48 @@
             // 
             // BlueLevel
             // 
+            this.BlueLevel.LargeChange = 20;
             this.BlueLevel.Location = new System.Drawing.Point(26, 91);
+            this.BlueLevel.Maximum = 255;
+            this.BlueLevel.Minimum = -255;
             this.BlueLevel.Name = "BlueLevel";
             this.BlueLevel.Size = new System.Drawing.Size(104, 38);
+            this.BlueLevel.SmallChange = 10;
             this.BlueLevel.TabIndex = 9;
+            this.BlueLevel.ValueChanged += new System.EventHandler(this.ColorLevel_ValueChanged);
             // 
             // GreenLevel
             // 
+            this.GreenLevel.LargeChange = 20;
             this.GreenLevel.Location = new System.Drawing.Point(26, 47);
+            this.GreenLevel.Maximum = 255;
+            this.GreenLevel.Minimum = -255;
             this.GreenLevel.Name = "GreenLevel";
             this.GreenLevel.Size = new System.Drawing.Size(104, 38);
+            this.GreenLevel.SmallChange = 10;
             this.GreenLevel.TabIndex = 11;
+            this.GreenLevel.ValueChanged += new System.EventHandler(this.ColorLevel_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(23, 142);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Saturation";
+            // 
+            // saturationLevel
+            // 
+            this.saturationLevel.LargeChange = 20;
+            this.saturationLevel.Location = new System.Drawing.Point(19, 158);
+            this.saturationLevel.Maximum = 255;
+            this.saturationLevel.Minimum = -255;
+            this.saturationLevel.Name = "saturationLevel";
+            this.saturationLevel.Size = new System.Drawing.Size(104, 45);
+            this.saturationLevel.SmallChange = 10;
+            this.saturationLevel.TabIndex = 17;
+            this.saturationLevel.ValueChanged += new System.EventHandler(this.saturationLevel_ValueChanged);
             // 
             // ImageBox
             // 
@@ -280,12 +332,6 @@
             this.ImageBox.Size = new System.Drawing.Size(540, 388);
             this.ImageBox.TabIndex = 11;
             this.ImageBox.ZoomValue = 1D;
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
-            this.aboutToolStripMenuItem.Text = "About";
             // 
             // MainView
             // 
@@ -309,6 +355,7 @@
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BlueLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,7 +386,8 @@
         private System.Windows.Forms.Button ZoomOut;
         private System.Windows.Forms.Button ZoomIn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TrackBar saturationLevel;
     }
 }
 

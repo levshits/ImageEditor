@@ -1,0 +1,30 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:converter="clr-namespace:ImageViewer.Converter"
+	mc:Ignorable="d"
+	x:Class="ImageViewer.ZoomPanImageBox"
+	x:Name="UserControl"
+	d:DesignWidth="378" d:DesignHeight="296">
+
+    <UserControl.Resources>
+        <converter:WPFBitmapConverter x:Key="ImageConverter" />
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
+        <ScrollViewer Name="Viewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+            <Image Name="ImageBox" Source="{Binding Image.ImageView, Converter={StaticResource ImageConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" MouseLeftButtonDown="ImageBox_MouseLeftButtonDown" MouseMove="ImageBox_MouseMove" MouseLeftButtonUp="ImageBox_MouseLeftButtonUp" MouseWheel="ImageBox_MouseWheel">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

@@ -73,11 +73,20 @@ namespace ImageLibrary
         public void Save()
         {
             ImageView.Save(_path);
+            _sourceImage = ImageView;
         }
 
         public void Save(String path)
         {
             ImageView.Save(path);
+            _sourceImage = ImageView;
+        }
+
+        public void ChangeColor(int red, int green, int blue)
+        {
+            IFilter f = new ColorFilter(red, green, blue);
+            filter.AddOrUpdateFilter(f);
+            ImageView = filter.Apply(_sourceImage);
         }
     }
 }

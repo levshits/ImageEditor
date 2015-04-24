@@ -16,13 +16,17 @@ namespace ImageViewer.Converter
         public object Convert(object value, Type targetType, object parameter,
             System.Globalization.CultureInfo culture)
         {
-            MemoryStream ms = new MemoryStream();
-            ((System.Drawing.Bitmap)value).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
-            BitmapImage image = new BitmapImage();
-            image.BeginInit();
-            ms.Seek(0, SeekOrigin.Begin);
-            image.StreamSource = ms;
-            image.EndInit();
+            BitmapImage image = default(BitmapImage);
+            if (value != null)
+            {
+                MemoryStream ms = new MemoryStream();
+                ((System.Drawing.Bitmap) value).Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+                image = new BitmapImage();
+                image.BeginInit();
+                ms.Seek(0, SeekOrigin.Begin);
+                image.StreamSource = ms;
+                image.EndInit();
+            }
 
             return image;
         }

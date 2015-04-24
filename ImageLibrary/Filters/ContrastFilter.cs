@@ -12,7 +12,7 @@ namespace ImageLibrary.Filters
     {
         public ContrastFilter(int contrastLevel)
         {
-            float c = (float) (256+contrastLevel)/255;
+            float c =  (float)(Math.Pow(Math.E,(double)(256+contrastLevel*2)/255)/Math.E);
             float t = (1f - c)*0.5f;
             _matrix = new float[][]
             {

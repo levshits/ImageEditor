@@ -21,29 +21,29 @@
                 <MenuItem Header="Save as" Command="{Binding SaveAsCommand}"/>
                 <MenuItem Header="Close" Command="{Binding CloseCommand}"/>
             </MenuItem>
-            <MenuItem Header="About"/>
         </Menu>
-        <ScrollViewer Margin="139,23,0,0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-            <Image Source="{Binding Image.ImageView, Converter={StaticResource ImageConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Height="Auto" Width="Auto" d:IsLocked="True"/>
-        </ScrollViewer>
+        <imageViewer:ZoomPanImageBox Margin="139,23,0,0"/>
         <StackPanel IsEnabled="{Binding Image, Converter={StaticResource ImageToBoolConverter}}" Margin="10,23,0,10" Orientation="Vertical" HorizontalAlignment="Left" Width="124">
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Brightness" Height="20" FontSize="14"/>
             <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Brightness}"/>
             <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Contrast"  Width="54.41" Height="20" FontSize="14"/>
             <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Contrast}"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Saturation"  Width="64" Height="20" FontSize="14"/>
+            <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Saturation}"/>
             <GroupBox  VerticalAlignment="Top" Header="Color" FontSize="14" Height="91">
+
                 <StackPanel>
                     <Grid Height="20">
                         <TextBlock Text="R:"/>
-                        <Slider Maximum="255" Minimum="-255"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
+                        <Slider Maximum="255" Minimum="-255" Value="{Binding Red}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
                     </Grid>
                     <Grid Height="20">
                         <TextBlock Text="G:"/>
-                        <Slider Maximum="255" Minimum="-255"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
+                        <Slider Maximum="255" Minimum="-255" Value="{Binding Green}"   LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
                     </Grid>
                     <Grid Height="20">
                         <TextBlock Text="B:"/>
-                        <Slider Maximum="255" Minimum="-255"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
+                        <Slider Maximum="255" Minimum="-255"  Value="{Binding Blue}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
                     </Grid>
                 </StackPanel>
             </GroupBox>

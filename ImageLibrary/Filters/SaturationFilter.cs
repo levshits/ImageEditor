@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing.Imaging;
 
 namespace ImageLibrary.Filters
 {
@@ -15,7 +10,12 @@ namespace ImageLibrary.Filters
 
         public SaturationFilter(int saturation)
         {
-            var s = (float)saturation / 255;
+            if (saturation > 0)
+            {
+                saturation *= 10;
+            }
+            
+            var s = (float)(255+saturation) / 255;
             float sr = (1 - s) * lumR;
             float sg = (1 - s) * lumG;
             float sb = (1 - s) * lumB;
