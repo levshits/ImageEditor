@@ -5,7 +5,7 @@
         xmlns:converter="clr-namespace:ImageViewer.Converter"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="ImageViewer.MainWindow"
-        Title="MainWindow" Height="350" Width="525">
+        Title="ImageViewer" Height="350" Width="525" Icon="{DynamicResource Icon}">
     <Window.Resources>
         <converter:WPFBitmapConverter x:Key="ImageConverter" />
         <converter:ImageToBoolConverter x:Key="ImageToBoolConverter"/>

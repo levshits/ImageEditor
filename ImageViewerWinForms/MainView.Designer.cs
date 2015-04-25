@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.File = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,6 +43,8 @@
             this.brightnessLevel = new System.Windows.Forms.TrackBar();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.saturationLevel = new System.Windows.Forms.TrackBar();
             this.ZoomOut = new System.Windows.Forms.Button();
             this.ZoomIn = new System.Windows.Forms.Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -50,8 +53,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.BlueLevel = new System.Windows.Forms.TrackBar();
             this.GreenLevel = new System.Windows.Forms.TrackBar();
-            this.label7 = new System.Windows.Forms.Label();
-            this.saturationLevel = new System.Windows.Forms.TrackBar();
             this.ImageBox = new ImageViewerWinForms.ZoomAndPanImageBox();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RedLevel)).BeginInit();
@@ -59,10 +60,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.brightnessLevel)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BlueLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLevel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // mainMenu
@@ -89,28 +90,28 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.saveAsToolStripMenuItem.Text = "Save as";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -211,6 +212,27 @@
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(23, 142);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(55, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Saturation";
+            // 
+            // saturationLevel
+            // 
+            this.saturationLevel.LargeChange = 20;
+            this.saturationLevel.Location = new System.Drawing.Point(19, 158);
+            this.saturationLevel.Maximum = 255;
+            this.saturationLevel.Minimum = -255;
+            this.saturationLevel.Name = "saturationLevel";
+            this.saturationLevel.Size = new System.Drawing.Size(104, 45);
+            this.saturationLevel.SmallChange = 10;
+            this.saturationLevel.TabIndex = 17;
+            this.saturationLevel.ValueChanged += new System.EventHandler(this.saturationLevel_ValueChanged);
+            // 
             // ZoomOut
             // 
             this.ZoomOut.Location = new System.Drawing.Point(83, 20);
@@ -302,27 +324,6 @@
             this.GreenLevel.TabIndex = 11;
             this.GreenLevel.ValueChanged += new System.EventHandler(this.ColorLevel_ValueChanged);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 142);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 13);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Saturation";
-            // 
-            // saturationLevel
-            // 
-            this.saturationLevel.LargeChange = 20;
-            this.saturationLevel.Location = new System.Drawing.Point(19, 158);
-            this.saturationLevel.Maximum = 255;
-            this.saturationLevel.Minimum = -255;
-            this.saturationLevel.Name = "saturationLevel";
-            this.saturationLevel.Size = new System.Drawing.Size(104, 45);
-            this.saturationLevel.SmallChange = 10;
-            this.saturationLevel.TabIndex = 17;
-            this.saturationLevel.ValueChanged += new System.EventHandler(this.saturationLevel_ValueChanged);
-            // 
             // ImageBox
             // 
             this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -340,6 +341,7 @@
             this.ClientSize = new System.Drawing.Size(706, 418);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.mainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Name = "MainView";
             this.Text = "ImageViewer";
@@ -351,11 +353,11 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BlueLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.GreenLevel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.saturationLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
