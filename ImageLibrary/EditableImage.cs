@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Runtime.CompilerServices;
 using AForge.Imaging.Filters;
 using ImageLibrary.Annotations;
@@ -72,13 +74,19 @@ namespace ImageLibrary
 
         public void Save()
         {
-            ImageView.Save(_path);
+            var extension = Path.GetExtension(_path);
+            extension = extension.ToLower();
+            _sourceImage.Dispose();
+            File.Delete(_path);
+            ImageView.Save(_path, StringToImageExtensionConverter.Convert(extension));
             _sourceImage = ImageView;
         }
 
         public void Save(String path)
         {
-            ImageView.Save(path);
+            var extension = Path.GetExtension(path);
+            extension = extension.ToLower();
+            ImageView.Save(path, StringToImageExtensionConverter.Convert(extension));
             _sourceImage = ImageView;
         }
 

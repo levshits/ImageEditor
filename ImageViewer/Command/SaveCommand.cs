@@ -13,7 +13,7 @@ namespace ImageViewer.Command
         private EditableImageViewModel _viewModel;
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _viewModel.Image != null && _viewModel.Image.IsChanged();
         }
 
         public void Execute(object parameter)
@@ -21,10 +21,15 @@ namespace ImageViewer.Command
             if (_viewModel.Image != null)
             {
                 _viewModel.Image.Save();
+                _viewModel.Reset();
             }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
 
         public SaveCommand(EditableImageViewModel viewModel)
         {

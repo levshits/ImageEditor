@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using ImageLibrary;
 using Microsoft.Win32;
@@ -24,14 +25,28 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            var openDialog = new OpenFileDialog() { Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.tif;" };
-            openDialog.ShowDialog();
-            if (File.Exists(openDialog.FileName))
+            if (_viewModel.Image != null && _viewModel.Image.IsChanged())
             {
-                _viewModel.Image = new EditableImage(openDialog.FileName);
-            };
+                var result = MessageBox.Show("Do you want open other image without saving?", "Warning",
+                    MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.No)
+                {
+                    return;
+                }
+
+            }
+            var openDialog = new OpenFileDialog() {Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;"};
+                    openDialog.ShowDialog();
+                    if (File.Exists(openDialog.FileName))
+                    {
+                        _viewModel.Image = new EditableImage(openDialog.FileName);
+                    }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
     }
 }

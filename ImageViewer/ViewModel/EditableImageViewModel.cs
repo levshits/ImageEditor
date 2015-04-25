@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using ImageLibrary;
 using ImageLibrary.Annotations;
 using ImageViewer.Command;
@@ -37,7 +38,6 @@ namespace ImageViewer
             set
             {
                 _brightness = value;
-                Image.ChangeBrightness(value);
                 OnPropertyChanged();
             }
         }
@@ -50,7 +50,6 @@ namespace ImageViewer
             set
             {
                 _contrast = value;
-                Image.ChangeContrast(value);
                 OnPropertyChanged();
             }
         }
@@ -63,11 +62,11 @@ namespace ImageViewer
             set
             {
                 _saturation = value;
-                Image.ChangeSaturation(value);
                 OnPropertyChanged();
             }
         }
 
+        
         private int _red;
 
         public int Red
@@ -76,7 +75,6 @@ namespace ImageViewer
             set
             {
                 _red = value;
-                Image.ChangeColor(Red, Green, Blue);
                 OnPropertyChanged();
             }
         }
@@ -89,7 +87,6 @@ namespace ImageViewer
             set
             {
                 _green = value;
-                Image.ChangeColor(Red, Green, Blue);
                 OnPropertyChanged();
             }
         }
@@ -102,21 +99,37 @@ namespace ImageViewer
             set
             {
                 _blue = value;
-                Image.ChangeColor(Red, Green, Blue);
                 OnPropertyChanged();
             }
         }
 
-        //public float Saturation
-        //{
-        //    get { return _saturation; }
-        //    set
-        //    {
-        //        _saturation = value;
-        //        Image.ChangeSaturation(value);
-        //        OnPropertyChanged();
-        //    }
-        //}
+        public void OnBrightnessChanged()
+        {
+            Image.ChangeBrightness(Brightness);
+        }
+        public void OnSaturationChanged()
+        {
+            Image.ChangeSaturation(Saturation);
+        }
+        public void OnContrastChanged()
+        {
+            Image.ChangeContrast(Contrast);
+        }
+
+        public void OnColorChanged()
+        {
+            Image.ChangeColor(Red, Green, Blue);
+        }
+
+        public void Reset()
+        {
+            Red = 0;
+            Green = 0;
+            Blue = 0;
+            Brightness = 0;
+            Contrast = 0;
+            Saturation = 0;
+        }
 
         public ICommand OpenCommand { get; private set; }
         public ICommand SaveCommand { get; private set; }

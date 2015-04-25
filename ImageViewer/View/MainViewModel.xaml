@@ -4,52 +4,89 @@
         xmlns:imageViewer="clr-namespace:ImageViewer"
         xmlns:converter="clr-namespace:ImageViewer.Converter"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" mc:Ignorable="d" x:Class="ImageViewer.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="ImageViewer.MainWindow"
         Title="MainWindow" Height="350" Width="525">
     <Window.Resources>
         <converter:WPFBitmapConverter x:Key="ImageConverter" />
         <converter:ImageToBoolConverter x:Key="ImageToBoolConverter"/>
     </Window.Resources>
+	
     <Window.DataContext>
         <imageViewer:EditableImageViewModel/>
     </Window.DataContext>
-    <Grid>
-        <Menu IsMainMenu="True" VerticalAlignment="Top" Height="23">
-            <MenuItem Header="File">
-                <MenuItem Header="Open" Command="{Binding OpenCommand}"/>
-                <MenuItem Header="Save" Command="{Binding SaveCommand, UpdateSourceTrigger=Default}"/>
-                <MenuItem Header="Save as" Command="{Binding SaveAsCommand, UpdateSourceTrigger=PropertyChanged}"/>
-                <MenuItem Header="Close" Command="{Binding CloseCommand}"/>
-            </MenuItem>
-        </Menu>
-        <imageViewer:ZoomPanImageBox Margin="139,23,0,0"/>
-        <StackPanel IsEnabled="{Binding Image, Converter={StaticResource ImageToBoolConverter}}" Margin="10,23,0,10" Orientation="Vertical" HorizontalAlignment="Left" Width="124">
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Brightness" Height="20" FontSize="14"/>
-            <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Brightness}"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Contrast"  Width="54.41" Height="20" FontSize="14"/>
-            <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Contrast}"/>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Saturation"  Width="64" Height="20" FontSize="14"/>
-            <Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Saturation}"/>
-            <GroupBox  VerticalAlignment="Top" Header="Color" FontSize="14" Height="91">
+	<Grid>
+		<Menu IsMainMenu="True" VerticalAlignment="Top" Height="23">
+			<MenuItem Header="File">
+				<MenuItem Header="Open" Command="{Binding OpenCommand}"/>
+				<MenuItem Header="Save" Command="{Binding SaveCommand, UpdateSourceTrigger=Default}"/>
+				<MenuItem Header="Save as" Command="{Binding SaveAsCommand, UpdateSourceTrigger=PropertyChanged}"/>
+				<MenuItem Header="Close" Command="{Binding CloseCommand}"/>
+			</MenuItem>
+		</Menu>
+		<imageViewer:ZoomPanImageBox Margin="139,23,0,0"/>
+		<StackPanel IsEnabled="{Binding Image, Converter={StaticResource ImageToBoolConverter}}" Margin="10,23,0,10" Orientation="Vertical" HorizontalAlignment="Left" Width="124">
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Brightness" Height="20" FontSize="14"/>
+			<Slider x:Name="slider" VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Brightness}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="ValueChanged">
+						<ei:CallMethodAction TargetObject="{Binding}" MethodName="OnBrightnessChanged"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Slider>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Contrast"  Width="54.41" Height="20" FontSize="14"/>
+			<Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Contrast}">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="ValueChanged">
+						<ei:CallMethodAction MethodName="OnContrastChanged" TargetObject="{Binding Mode=OneWay}"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Slider>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Text="Saturation"  Width="64" Height="20" FontSize="14"/>
+			<Slider VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Saturation}">
+				<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="ValueChanged">
+                        <ei:CallMethodAction TargetObject="{Binding Mode=OneWay}" MethodName="OnSaturationChanged"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+			</Slider>
+			<GroupBox  VerticalAlignment="Top" Header="Color" FontSize="14" Height="91">
 
-                <StackPanel>
-                    <Grid Height="20">
-                        <TextBlock Text="R:"/>
-                        <Slider Maximum="255" Minimum="-255" Value="{Binding Red}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
-                    </Grid>
-                    <Grid Height="20">
-                        <TextBlock Text="G:"/>
-                        <Slider Maximum="255" Minimum="-255" Value="{Binding Green}"   LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
-                    </Grid>
-                    <Grid Height="20">
-                        <TextBlock Text="B:"/>
-                        <Slider Maximum="255" Minimum="-255"  Value="{Binding Blue}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0"/>
-                    </Grid>
-                </StackPanel>
-            </GroupBox>
+				<StackPanel>
+					<Grid Height="20">
+						<TextBlock Text="R:"/>
+						<Slider Maximum="255" Minimum="-255" Value="{Binding Red}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="ValueChanged">
+									<ei:CallMethodAction MethodName="OnColorChanged" TargetObject="{Binding Mode=OneWay}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</Slider>
+					</Grid>
+					<Grid Height="20">
+						<TextBlock Text="G:"/>
+						<Slider Maximum="255" Minimum="-255" Value="{Binding Green}"   LargeChange="1" SmallChange="0.1" Margin="10,0,0,0">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="ValueChanged">
+                                    <ei:CallMethodAction MethodName="OnColorChanged" TargetObject="{Binding Mode=OneWay}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</Slider>
+					</Grid>
+					<Grid Height="20">
+						<TextBlock Text="B:"/>
+						<Slider Maximum="255" Minimum="-255"  Value="{Binding Blue}"  LargeChange="1" SmallChange="0.1" Margin="10,0,0,0">
+							<i:Interaction.Triggers>
+								<i:EventTrigger EventName="ValueChanged">
+									<ei:CallMethodAction MethodName="OnColorChanged" TargetObject="{Binding Mode=OneWay}"/>
+								</i:EventTrigger>
+							</i:Interaction.Triggers>
+						</Slider>
+					</Grid>
+				</StackPanel>
+			</GroupBox>
 
 
-        </StackPanel>
+		</StackPanel>
 
-    </Grid>
+	</Grid>
 </Window>

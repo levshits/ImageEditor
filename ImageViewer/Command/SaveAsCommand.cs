@@ -20,22 +20,28 @@ namespace ImageViewer.Command
 
         public bool CanExecute(object parameter)
         {
-            return true;
+            return _viewModel.Image != null;
         }
 
         public void Execute(object parameter)
         {
             if (_viewModel.Image != null)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                SaveFileDialog saveFileDialog = new SaveFileDialog() { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
                 saveFileDialog.ShowDialog();
                 if (!File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
                 {
+                    
                     _viewModel.Image.Save(saveFileDialog.FileName);
+                    _viewModel.Reset();
                 }
             }
         }
 
-        public event EventHandler CanExecuteChanged;
+        public event EventHandler CanExecuteChanged
+        {
+            add { CommandManager.RequerySuggested += value; }
+            remove { CommandManager.RequerySuggested -= value; }
+        }
     }
 }
