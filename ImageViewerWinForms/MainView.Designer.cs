@@ -1,11 +1,14 @@
-﻿namespace ImageViewerWinForms
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace ImageViewerWinForms
 {
     partial class MainView
     {
         /// <summary>
         /// Required designer variable.
         /// </summary>
-        private System.ComponentModel.IContainer components = null;
+        private IContainer components = null;
 
         /// <summary>
         /// Clean up any resources being used.
@@ -365,31 +368,31 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip mainMenu;
-        private System.Windows.Forms.ToolStripMenuItem File;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TrackBar RedLevel;
-        private System.Windows.Forms.TrackBar contrastLevel;
-        private System.Windows.Forms.TrackBar brightnessLevel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private MenuStrip mainMenu;
+        private ToolStripMenuItem File;
+        private ToolStripMenuItem openToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem saveAsToolStripMenuItem;
+        private ToolStripMenuItem exitToolStripMenuItem;
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private TrackBar RedLevel;
+        private TrackBar contrastLevel;
+        private TrackBar brightnessLevel;
+        private TableLayoutPanel tableLayoutPanel1;
+        private GroupBox groupBox1;
         private ZoomAndPanImageBox ImageBox;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TrackBar GreenLevel;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TrackBar BlueLevel;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button ZoomOut;
-        private System.Windows.Forms.Button ZoomIn;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TrackBar saturationLevel;
+        private Label label6;
+        private TrackBar GreenLevel;
+        private Label label5;
+        private TrackBar BlueLevel;
+        private Label label4;
+        private Button ZoomOut;
+        private Button ZoomIn;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Label label7;
+        private TrackBar saturationLevel;
     }
 }
 

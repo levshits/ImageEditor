@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using ImageViewer.ViewModel;
 using Microsoft.Win32;
 
 namespace ImageViewer.Command
 {
     class SaveAsCommand:ICommand
     {
-        private EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel _viewModel;
 
         public SaveAsCommand(EditableImageViewModel viewModel)
         {
@@ -27,7 +24,7 @@ namespace ImageViewer.Command
         {
             if (_viewModel.Image != null)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog() { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
+                SaveFileDialog saveFileDialog = new SaveFileDialog { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
                 saveFileDialog.ShowDialog();
                 if (!File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
                 {

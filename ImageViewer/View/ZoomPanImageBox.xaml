@@ -5,12 +5,12 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:converter="clr-namespace:ImageViewer.Converter"
 	mc:Ignorable="d"
-	x:Class="ImageViewer.ZoomPanImageBox"
+	x:Class="ImageViewer.View.ZoomPanImageBox"
 	x:Name="UserControl"
 	d:DesignWidth="378" d:DesignHeight="296">
 
     <UserControl.Resources>
-        <converter:WPFBitmapConverter x:Key="ImageConverter" />
+        <converter:WpfBitmapConverter x:Key="ImageConverter" />
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot">

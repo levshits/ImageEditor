@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageLibrary
 {
     public class StringToImageExtensionConverter
     {
-        public static ImageFormat Convert(String value)
+        public static ImageFormat Convert(string value)
         {
             switch (value)
             {

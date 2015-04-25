@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ImageLibrary;
 
@@ -21,7 +14,7 @@ namespace ImageViewerWinForms
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog() { Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;" };
+            OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;" };
             openFileDialog.ShowDialog();
             if(System.IO.File.Exists(openFileDialog.FileName))
                 _image = new EditableImage(openFileDialog.FileName);
@@ -78,7 +71,7 @@ namespace ImageViewerWinForms
         {
             if (_image != null)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog() { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
+                SaveFileDialog saveFileDialog = new SaveFileDialog { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
                 saveFileDialog.ShowDialog();
                 if (!System.IO.File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
                 {

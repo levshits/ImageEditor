@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using ImageLibrary;
 using ImageLibrary.Annotations;
 using ImageViewer.Command;
 
-namespace ImageViewer
+namespace ImageViewer.ViewModel
 {
     public class EditableImageViewModel:INotifyPropertyChanged
     {

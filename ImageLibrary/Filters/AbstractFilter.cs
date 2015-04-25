@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageLibrary.Filters
 {
@@ -24,12 +19,11 @@ namespace ImageLibrary.Filters
             int width = source.Width;
             int height = source.Height;
 
-            ImageAttributes attributes = new ImageAttributes();
+            var attributes = new ImageAttributes();
             attributes.SetColorMatrix(Matrix);
-            Graphics g = default(System.Drawing.Graphics);
-            Bitmap resultImage = new Bitmap(width, height, Graphics.FromImage(source));
-            g = Graphics.FromImage(resultImage);
-            Rectangle region = new Rectangle(0, 0, width, height);
+            var resultImage = new Bitmap(width, height, Graphics.FromImage(source));
+            var g = Graphics.FromImage(resultImage);
+            var region = new Rectangle(0, 0, width, height);
             g.DrawImage(source, region, 0, 0, width, height, GraphicsUnit.Pixel, attributes);
             GC.Collect();
             return resultImage; 

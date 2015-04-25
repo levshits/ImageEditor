@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace ImageViewerWinForms
@@ -14,7 +13,7 @@ namespace ImageViewerWinForms
 		/// <summary> 
 		/// Required designer variable.
 		/// </summary>
-		private System.ComponentModel.Container components = null;
+		private Container components = null;
 
 		#region Construct, Dispose
 		/// <summary> 

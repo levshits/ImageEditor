@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Microsoft.Win32;
+using ImageViewer.ViewModel;
 
 namespace ImageViewer.Command
 {
     class SaveCommand:ICommand
     {
-        private EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel _viewModel;
         public bool CanExecute(object parameter)
         {
             return _viewModel.Image != null && _viewModel.Image.IsChanged();

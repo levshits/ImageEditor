@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using ImageLibrary;
+using ImageViewer.ViewModel;
 using Microsoft.Win32;
 
 namespace ImageViewer.Command
 {
     class OpenCommand:ICommand
     {
-        private EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel _viewModel;
         public OpenCommand(EditableImageViewModel viewModel)
         {
             _viewModel = viewModel;
@@ -35,7 +32,7 @@ namespace ImageViewer.Command
                 }
 
             }
-            var openDialog = new OpenFileDialog() {Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;"};
+            var openDialog = new OpenFileDialog {Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;"};
                     openDialog.ShowDialog();
                     if (File.Exists(openDialog.FileName))
                     {

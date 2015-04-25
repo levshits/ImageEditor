@@ -4,15 +4,18 @@
         xmlns:imageViewer="clr-namespace:ImageViewer"
         xmlns:converter="clr-namespace:ImageViewer.Converter"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" mc:Ignorable="d" x:Class="ImageViewer.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:c1="http://schemas.componentone.com/winfx/2006/xaml" xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:view="clr-namespace:ImageViewer.View"
+    xmlns:viewModel="clr-namespace:ImageViewer.ViewModel"
+    mc:Ignorable="d" x:Class="ImageViewer.MainWindow"
         Title="ImageViewer" Height="350" Width="525" Icon="{DynamicResource Icon}">
     <Window.Resources>
-        <converter:WPFBitmapConverter x:Key="ImageConverter" />
+        <converter:WpfBitmapConverter x:Key="ImageConverter" />
         <converter:ImageToBoolConverter x:Key="ImageToBoolConverter"/>
     </Window.Resources>
 	
     <Window.DataContext>
-        <imageViewer:EditableImageViewModel/>
+        <viewModel:EditableImageViewModel/>
     </Window.DataContext>
 	<Grid>
 		<Menu IsMainMenu="True" VerticalAlignment="Top" Height="23">
@@ -23,7 +26,7 @@
 				<MenuItem Header="Close" Command="{Binding CloseCommand}"/>
 			</MenuItem>
 		</Menu>
-		<imageViewer:ZoomPanImageBox Margin="139,23,0,0"/>
+		<view:ZoomPanImageBox Margin="139,23,0,0"/>
 		<StackPanel IsEnabled="{Binding Image, Converter={StaticResource ImageToBoolConverter}}" Margin="10,23,0,10" Orientation="Vertical" HorizontalAlignment="Left" Width="124">
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Brightness" Height="20" FontSize="14"/>
 			<Slider x:Name="slider" VerticalAlignment="Top" Maximum="255" Minimum="-255" Value="{Binding Brightness}">

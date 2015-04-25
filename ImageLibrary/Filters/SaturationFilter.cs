@@ -19,13 +19,13 @@ namespace ImageLibrary.Filters
             float sr = (1 - s) * lumR;
             float sg = (1 - s) * lumG;
             float sb = (1 - s) * lumB;
-            _matrix = new float[][]
+            _matrix = new[]
             {
-                new float[]{sr+s, sr, sr, 0, 0},
-                new float[]{sg, sg+s, sg, 0, 0}, 
-                new float[]{sb, sb, sb+s, 0, 0}, 
+                new[]{sr+s, sr, sr, 0, 0},
+                new[]{sg, sg+s, sg, 0, 0}, 
+                new[]{sb, sb, sb+s, 0, 0}, 
                 new float[]{0, 0, 0, 1, 0}, 
-                new float[]{0, 0, 0, 0, 1}, 
+                new float[]{0, 0, 0, 0, 1} 
             };
             Matrix = new ColorMatrix(_matrix);
         }

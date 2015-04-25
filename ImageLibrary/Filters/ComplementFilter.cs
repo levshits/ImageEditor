@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImageLibrary.Filters
 {
     class ComplementFilter: AbstractFilter
     {
-        private Dictionary<Type, IFilter> filters = new Dictionary<Type, IFilter>(); 
-        public ComplementFilter() { }
+        private Dictionary<Type, IFilter> filters = new Dictionary<Type, IFilter>();
 
         public void AddOrUpdateFilter(IFilter filter)
         {
