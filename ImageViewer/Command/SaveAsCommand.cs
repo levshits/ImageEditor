@@ -8,29 +8,29 @@ namespace ImageViewer.Command
 {
     class SaveAsCommand:ICommand
     {
-        private readonly EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel viewModel;
 
         public SaveAsCommand(EditableImageViewModel viewModel)
         {
-            _viewModel = viewModel;
+            this.viewModel = viewModel;
         }
 
         public bool CanExecute(object parameter)
         {
-            return _viewModel.Image != null;
+            return viewModel.Image != null;
         }
 
         public void Execute(object parameter)
         {
-            if (_viewModel.Image != null)
+            if (viewModel.Image != null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
                 saveFileDialog.ShowDialog();
                 if (!File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
                 {
                     
-                    _viewModel.Image.Save(saveFileDialog.FileName);
-                    _viewModel.Reset();
+                    viewModel.Image.Save(saveFileDialog.FileName);
+                    viewModel.Reset();
                 }
             }
         }

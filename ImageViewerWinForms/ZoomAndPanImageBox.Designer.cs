@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace ImageViewerWinForms
@@ -91,86 +92,94 @@ namespace ImageViewerWinForms
 			}
 			set
 			{
+			    Image b = value;
 				// enable the zoom control if this is not a null image
 				if (value != null)
 				{
-				    ComputeImageBoxSize(value);
-				    CenterImage();
+				    if (imageBox.Image == null)
+				    {
+				        ComputeImageBoxSize(value);
+				        CenterImage();
+				    }
 				}
 				else
 				{
 					imageBox.Size = panel.Size;
 				}
-                // Set the image value
-                imageBox.Image = value;
+                imageBox.Image = b;
 			}
 		}
+
+        public bool SelectionIsActive = false;
         private bool _isMousePressed = false;
         private int prevX = 0;
         private int prevY = 0;
         private void image_MouseDown(object sender, MouseEventArgs e)
         {
-            _isMousePressed = true;
-            prevX = e.Location.X;
-            prevY = e.Location.Y;
+            
+            if (!SelectionIsActive)
+            {
+                _isMousePressed = true;
+                prevX = e.Location.X;
+                prevY = e.Location.Y;
+            }
+            else
+            {
+                prevX = Convert.ToInt32(e.Location.X / zoomValue);
+                prevY = Convert.ToInt32(e.Location.Y / zoomValue);
+                var pos = new Point { X = Convert.ToInt32(e.X / ZoomValue), Y = Convert.ToInt32(e.Y / ZoomValue) };
+                if (prevX < e.X && prevY < e.Y)
+                {
+                    EditableImage.Rectangle = new Rectangle(prevX, prevY, pos.X - prevX, pos.Y - prevY);
+                    Image = EditableImage.ImageView;
+                }
+                else
+                {
+                    EditableImage.Rectangle = Rectangle.Empty;
+                } 
+            }
         }
         private void image_MouseUp(object sender, MouseEventArgs e)
         {
+            if (SelectionIsActive)
+            {
+                var pos = new Point { X = Convert.ToInt32(e.X / ZoomValue), Y = Convert.ToInt32(e.Y / ZoomValue) };
+                if (prevX < pos.X && prevY < pos.Y)
+                {
+                    EditableImage.Rectangle = new Rectangle(prevX, prevY, pos.X - prevX, pos.Y - prevY);
+                    Image = EditableImage.ImageView;
+                }
+                else
+                {
+                    EditableImage.Rectangle = Rectangle.Empty;
+                    Image = EditableImage.ImageView;
+                } 
+            }
             _isMousePressed = false;
         }
         private void image_MouseMove(object sender, MouseEventArgs e)
         {
+            if (SelectionIsActive && e.Button == MouseButtons.Left)
+            {
+                var pos = new Point { X = Convert.ToInt32(e.X / ZoomValue), Y = Convert.ToInt32(e.Y / ZoomValue) };
+                if (prevX < pos.X && prevY < pos.Y)
+                {
+                    EditableImage.Rectangle = new Rectangle(prevX, prevY, pos.X - prevX, pos.Y - prevY);
+                    Image = EditableImage.ImageView;
+                }
+                else
+                {
+                    EditableImage.Rectangle = Rectangle.Empty;
+                    Image = EditableImage.ImageView;
+                }
+            }
             if (_isMousePressed)
             {
                 imageBox.Location = new Point(imageBox.Left + e.Location.X - prevX,
                 imageBox.Top + e.Location.Y - prevY);
-                /////OPTIMIZE
-                //int deltaX = (e.X - prevX);
-                //int newValueX = panel.AutoScrollPosition.X;
-                //if(Math.Abs(deltaX)>3)
-                //    newValueX += deltaX;
-                //int deltaY = (e.Y - prevY);
-                //int newValueY = panel.AutoScrollPosition.Y;
-                //if(Math.Abs(deltaY)>3)
-                //    newValueY += deltaY;
-                //if (panel.HorizontalScroll.Visible)
-                //{
-
-                //    if (newValueX >= 0 )
-                //    {
-                //        newValueX = 0;
-                //    }
-                //    else if (newValueX <=- panel.HorizontalScroll.Maximum)
-                //    {
-                //        newValueX = panel.HorizontalScroll.Maximum;
-                //    }
-                //    else
-                //    {
-                //        newValueX = Math.Abs(newValueX);
-                //    }
-                //}
-                //prevX = e.X;
-                //if (panel.VerticalScroll.Visible)
-                //{
-                //    if (newValueY >= 0 )
-                //    {
-                //        newValueY = 0;
-
-                //    }
-                //        else if (newValueY <= -panel.VerticalScroll.Maximum)
-                //    {
-                //        newValueX = panel.HorizontalScroll.Maximum;
-                //    }
-                //    else
-                //    {
-                //        newValueY = Math.Abs(newValueY);
-                //    }
-                //}
-                //prevY = e.Y;
-                //panel.AutoScrollPosition = new Point(newValueX, newValueY);
             }
         }
-        private double _zoomValue = 1;
+        private double zoomValue = 1;
         public PictureBox imageBox;
         private Panel panel;
 
@@ -178,15 +187,15 @@ namespace ImageViewerWinForms
         {
             get
             {
-                return _zoomValue;
+                return zoomValue;
             }
             set
             {
-                _zoomValue = value;
+                zoomValue = value;
                 if (Image != null)
                 {
-                    imageBox.Width = Convert.ToInt32(imageBox.Image.Width*_zoomValue);
-                    imageBox.Height = Convert.ToInt32(imageBox.Image.Height*_zoomValue);
+                    imageBox.Width = Convert.ToInt32(imageBox.Image.Width*zoomValue);
+                    imageBox.Height = Convert.ToInt32(imageBox.Image.Height*zoomValue);
                 }
             }
         }

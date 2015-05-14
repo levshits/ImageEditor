@@ -56,6 +56,8 @@ namespace ImageViewerWinForms
             this.label5 = new System.Windows.Forms.Label();
             this.BlueLevel = new System.Windows.Forms.TrackBar();
             this.GreenLevel = new System.Windows.Forms.TrackBar();
+            this.Selection = new System.Windows.Forms.Button();
+            this.Pan = new System.Windows.Forms.Button();
             this.ImageBox = new ImageViewerWinForms.ZoomAndPanImageBox();
             this.mainMenu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.RedLevel)).BeginInit();
@@ -75,7 +77,7 @@ namespace ImageViewerWinForms
             this.File});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(706, 24);
+            this.mainMenu.Size = new System.Drawing.Size(719, 24);
             this.mainMenu.TabIndex = 1;
             this.mainMenu.Text = "MainMenu";
             // 
@@ -121,7 +123,7 @@ namespace ImageViewerWinForms
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 46);
+            this.label1.Location = new System.Drawing.Point(23, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(56, 13);
             this.label1.TabIndex = 2;
@@ -130,7 +132,7 @@ namespace ImageViewerWinForms
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 94);
+            this.label2.Location = new System.Drawing.Point(23, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 13);
             this.label2.TabIndex = 3;
@@ -139,7 +141,7 @@ namespace ImageViewerWinForms
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 206);
+            this.label3.Location = new System.Drawing.Point(23, 234);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 4;
@@ -160,7 +162,7 @@ namespace ImageViewerWinForms
             // contrastLevel
             // 
             this.contrastLevel.LargeChange = 20;
-            this.contrastLevel.Location = new System.Drawing.Point(19, 110);
+            this.contrastLevel.Location = new System.Drawing.Point(19, 138);
             this.contrastLevel.Maximum = 255;
             this.contrastLevel.Minimum = -255;
             this.contrastLevel.Name = "contrastLevel";
@@ -172,7 +174,7 @@ namespace ImageViewerWinForms
             // brightnessLevel
             // 
             this.brightnessLevel.LargeChange = 20;
-            this.brightnessLevel.Location = new System.Drawing.Point(19, 62);
+            this.brightnessLevel.Location = new System.Drawing.Point(19, 90);
             this.brightnessLevel.Maximum = 255;
             this.brightnessLevel.Minimum = -255;
             this.brightnessLevel.Name = "brightnessLevel";
@@ -193,11 +195,13 @@ namespace ImageViewerWinForms
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(706, 394);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(719, 425);
             this.tableLayoutPanel1.TabIndex = 9;
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.Pan);
+            this.groupBox1.Controls.Add(this.Selection);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.saturationLevel);
             this.groupBox1.Controls.Add(this.ZoomOut);
@@ -211,14 +215,14 @@ namespace ImageViewerWinForms
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 388);
+            this.groupBox1.Size = new System.Drawing.Size(154, 419);
             this.groupBox1.TabIndex = 10;
             this.groupBox1.TabStop = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(23, 142);
+            this.label7.Location = new System.Drawing.Point(23, 170);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 13);
             this.label7.TabIndex = 16;
@@ -227,7 +231,7 @@ namespace ImageViewerWinForms
             // saturationLevel
             // 
             this.saturationLevel.LargeChange = 20;
-            this.saturationLevel.Location = new System.Drawing.Point(19, 158);
+            this.saturationLevel.Location = new System.Drawing.Point(19, 186);
             this.saturationLevel.Maximum = 255;
             this.saturationLevel.Minimum = -255;
             this.saturationLevel.Name = "saturationLevel";
@@ -267,7 +271,7 @@ namespace ImageViewerWinForms
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.BlueLevel, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.GreenLevel, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 222);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 250);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -327,13 +331,34 @@ namespace ImageViewerWinForms
             this.GreenLevel.TabIndex = 11;
             this.GreenLevel.ValueChanged += new System.EventHandler(this.ColorLevel_ValueChanged);
             // 
+            // Selection
+            // 
+            this.Selection.Location = new System.Drawing.Point(6, 48);
+            this.Selection.Name = "Selection";
+            this.Selection.Size = new System.Drawing.Size(65, 23);
+            this.Selection.TabIndex = 18;
+            this.Selection.Text = "Selection";
+            this.Selection.UseVisualStyleBackColor = true;
+            this.Selection.Click += new System.EventHandler(this.Selection_Click);
+            // 
+            // Pan
+            // 
+            this.Pan.Location = new System.Drawing.Point(77, 49);
+            this.Pan.Name = "Pan";
+            this.Pan.Size = new System.Drawing.Size(65, 23);
+            this.Pan.TabIndex = 19;
+            this.Pan.Text = "Pan";
+            this.Pan.UseVisualStyleBackColor = true;
+            this.Pan.Click += new System.EventHandler(this.Pan_Click);
+            // 
             // ImageBox
             // 
             this.ImageBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ImageBox.EditableImage = null;
             this.ImageBox.Image = null;
             this.ImageBox.Location = new System.Drawing.Point(163, 3);
             this.ImageBox.Name = "ImageBox";
-            this.ImageBox.Size = new System.Drawing.Size(540, 388);
+            this.ImageBox.Size = new System.Drawing.Size(553, 419);
             this.ImageBox.TabIndex = 11;
             this.ImageBox.ZoomValue = 1D;
             // 
@@ -341,7 +366,7 @@ namespace ImageViewerWinForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(706, 418);
+            this.ClientSize = new System.Drawing.Size(719, 449);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.mainMenu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -393,6 +418,8 @@ namespace ImageViewerWinForms
         private TableLayoutPanel tableLayoutPanel2;
         private Label label7;
         private TrackBar saturationLevel;
+        private Button Selection;
+        private Button Pan;
     }
 }
 

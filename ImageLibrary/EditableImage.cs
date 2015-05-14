@@ -10,17 +10,28 @@ namespace ImageLibrary
 {
     public class EditableImage: INotifyPropertyChanged
     {
-        private Bitmap _sourceImage;
-        private Bitmap _imageView;
-        private String _path;
-        private ComplementFilter _filter;
+        private Bitmap sourceImage;
+        private Bitmap imageView;
+        private readonly String path;
+        private readonly ComplementFilter filter;
+        private Rectangle rectangle;
+
+        public Rectangle Rectangle
+        {
+            get { return rectangle; }
+            set
+            {
+                rectangle = value;
+                DrawSelectionRect(sourceImage);
+            }
+        }
 
         public Bitmap ImageView
         {
-            get { return _imageView; }
+            get { return imageView; }
             private set
             {
-                _imageView = value;
+                imageView = value;
                 OnPropertyChanged();
             }
         }
@@ -37,49 +48,79 @@ namespace ImageLibrary
         #endregion INotifyPropertyChanged
         public EditableImage(String path)
         {
-            _sourceImage = new Bitmap(path);
-            _path = path;
-            ImageView = _sourceImage;
-            _filter = new ComplementFilter();
+            sourceImage = new Bitmap(path);
+            this.path = path;
+            ImageView = new Bitmap(sourceImage);
+            filter = new ComplementFilter();
+            Rectangle = Rectangle.Empty;
         }
 
+        private void DrawSelectionRect(Bitmap sourceImage)
+        {
+            if (Rectangle != Rectangle.Empty)
+            {
+                var tempBitmap = new Bitmap(sourceImage);
+                Graphics g = Graphics.FromImage(tempBitmap);
+                {
+                    g.DrawRectangle(new Pen(Color.Crimson, 3), Rectangle);
+                }
+                ImageView = tempBitmap;
+                GC.Collect();
+            }
+        }
         public void ChangeBrightness(int brightness)
         {
             IFilter f = new BrightnessFilter(brightness);
-            _filter.AddOrUpdateFilter(f);
-            ImageView = _filter.Apply(_sourceImage);
+            filter.AddOrUpdateFilter(f);
+            ApplyFilter();
+            DrawSelectionRect(imageView);
         }
 
         public void ChangeContrast(int contrast)
         {
             IFilter f = new ContrastFilter(contrast);
-            _filter.AddOrUpdateFilter(f);
-            ImageView = _filter.Apply(_sourceImage);
+            filter.AddOrUpdateFilter(f);
+            ApplyFilter();
+            DrawSelectionRect(imageView);
         }
 
         public void ChangeSaturation(int saturation)
         {
             IFilter f = new SaturationFilter(saturation);
-            _filter.AddOrUpdateFilter(f);
-            ImageView = _filter.Apply(_sourceImage);
+            filter.AddOrUpdateFilter(f);
+            ApplyFilter();
+            DrawSelectionRect(imageView);
+        }
+
+        private void ApplyFilter()
+        {
+            if (Rectangle == Rectangle.Empty)
+            {
+                ImageView = filter.Apply(sourceImage);
+            }
+            else
+            {
+                ImageView = filter.Apply(sourceImage, Rectangle);
+            }
         }
 
         public bool IsChanged()
         {
-            return _sourceImage != _imageView;
+            return sourceImage != imageView;
         }
 
         public void Save()
         {
-            var extension = Path.GetExtension(_path);
+            var extension = Path.GetExtension(path);
             if (extension != null)
             {
                 extension = extension.ToLower();
-                _sourceImage.Dispose();
-                File.Delete(_path);
-                ImageView.Save(_path, StringToImageExtensionConverter.Convert(extension));
+                File.Delete(path);
+                ApplyFilter();
+                sourceImage.Dispose();
+                ImageView.Save(path, StringToImageExtensionConverter.Convert(extension));
             }
-            _sourceImage = ImageView;
+            sourceImage = ImageView;
         }
 
         public void Save(String path)
@@ -88,16 +129,18 @@ namespace ImageLibrary
             if (extension != null)
             {
                 extension = extension.ToLower();
+                ApplyFilter();
                 ImageView.Save(path, StringToImageExtensionConverter.Convert(extension));
             }
-            _sourceImage = ImageView;
+            sourceImage = ImageView;
         }
 
         public void ChangeColor(int red, int green, int blue)
         {
             IFilter f = new ColorFilter(red, green, blue);
-            _filter.AddOrUpdateFilter(f);
-            ImageView = _filter.Apply(_sourceImage);
+            filter.AddOrUpdateFilter(f);
+            ApplyFilter();
+            DrawSelectionRect(imageView);
         }
     }
 }

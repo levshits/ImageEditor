@@ -4,93 +4,94 @@ using System.Windows.Input;
 using ImageLibrary;
 using ImageLibrary.Annotations;
 using ImageViewer.Command;
+using Microsoft.Expression.Interactivity.Core;
 
 namespace ImageViewer.ViewModel
 {
     public class EditableImageViewModel:INotifyPropertyChanged
     {
         
-        private EditableImage _image;
+        private EditableImage image;
 
         public EditableImage Image
         {
-            get { return _image; }
+            get { return image; }
             set
             {
-                _image = value;
+                image = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _brightness;
+        private int brightness;
 
         public int Brightness
         {
-            get { return _brightness; }
+            get { return brightness; }
             set
             {
-                _brightness = value;
+                brightness = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _contrast;
+        private int contrast;
 
         public int Contrast
         {
-            get { return _contrast; }
+            get { return contrast; }
             set
             {
-                _contrast = value;
+                contrast = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _saturation;
+        private int saturation;
 
         public int Saturation
         {
-            get { return _saturation; }
+            get { return saturation; }
             set
             {
-                _saturation = value;
+                saturation = value;
                 OnPropertyChanged();
             }
         }
 
         
-        private int _red;
+        private int red;
 
         public int Red
         {
-            get { return _red; }
+            get { return red; }
             set
             {
-                _red = value;
+                red = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _green;
+        private int green;
 
         public int Green
         {
-            get { return _green; }
+            get { return green; }
             set
             {
-                _green = value;
+                green = value;
                 OnPropertyChanged();
             }
         }
 
-        private int _blue;
+        private int blue;
 
         public int Blue
         {
-            get { return _blue; }
+            get { return blue; }
             set
             {
-                _blue = value;
+                blue = value;
                 OnPropertyChanged();
             }
         }
@@ -127,6 +128,10 @@ namespace ImageViewer.ViewModel
         public ICommand SaveCommand { get; private set; }
         public ICommand SaveAsCommand { get; private set; }
         public ICommand CloseCommand { get; private set; }
+        public ICommand SelectionCommand { get; private set; }
+        public ICommand PanCommand { get; private set; }
+
+        public bool SelectionActivated = false;
 
         public EditableImageViewModel()
         {
@@ -134,6 +139,9 @@ namespace ImageViewer.ViewModel
             SaveCommand = new SaveCommand(this);
             SaveAsCommand = new SaveAsCommand(this);
             CloseCommand = new CloseCommand(this);
+            SelectionCommand = new ActionCommand( ()=> { SelectionActivated = true; });
+            PanCommand = new ActionCommand((() => { SelectionActivated = false; }));
+
 
         }
         #region INotifyPropertyChanged

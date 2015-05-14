@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using ImageLibrary;
 
 namespace ImageViewerWinForms
 {
@@ -10,6 +11,8 @@ namespace ImageViewerWinForms
         {
             InitializeComponent();
         }
+
+        public EditableImage EditableImage { get; set; }
 
         private void imageBox_Click(object sender, EventArgs e)
         {
@@ -35,26 +38,26 @@ namespace ImageViewerWinForms
             {
                 if (panel.Height > value.Height)
                 {
-                    _zoomValue = 1;
+                    zoomValue = 1;
                     imageBox.Size = value.Size;
                 }
                 else
                 {
-                    _zoomValue = (double) (panel.Height)/value.Height;
-                    imageBox.Size = new Size(Convert.ToInt32(value.Width*_zoomValue), Convert.ToInt32(value.Height*_zoomValue));
+                    zoomValue = (double) (panel.Height)/value.Height;
+                    imageBox.Size = new Size(Convert.ToInt32(value.Width*zoomValue), Convert.ToInt32(value.Height*zoomValue));
                 }
             }
             else
             {
                 if (panel.Width > value.Width)
                 {
-                    _zoomValue = 1;
+                    zoomValue = 1;
                     imageBox.Size = value.Size;
                 }
                 else
                 {
-                    _zoomValue = (double) (panel.Width)/value.Width;
-                    imageBox.Size = new Size(Convert.ToInt32(value.Width*_zoomValue), Convert.ToInt32(value.Height*_zoomValue));
+                    zoomValue = (double) (panel.Width)/value.Width;
+                    imageBox.Size = new Size(Convert.ToInt32(value.Width*zoomValue), Convert.ToInt32(value.Height*zoomValue));
                 }
             }
         }

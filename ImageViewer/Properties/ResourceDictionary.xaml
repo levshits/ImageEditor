@@ -1,0 +1,6 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<BitmapImage x:Key="ImageSource1" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="C:\Users\Valentin\Documents\Visual Studio 2013\Projects\ImageViewer\ImageViewer\View\edit-icon.png"/>
+	<!-- Resource dictionary entries should be defined here. -->
+</ResourceDictionary>

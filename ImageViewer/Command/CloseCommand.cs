@@ -7,7 +7,7 @@ namespace ImageViewer.Command
 {
     class CloseCommand :ICommand
     {
-        private readonly EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel viewModel;
         public bool CanExecute(object parameter)
         {
             return true;
@@ -15,7 +15,7 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            if (_viewModel.Image != null && _viewModel.Image.IsChanged())
+            if (viewModel.Image != null && viewModel.Image.IsChanged())
             {
                 var result = MessageBox.Show("Do you want close program without saving?", "Warning",
                     MessageBoxButton.YesNo);
@@ -34,7 +34,7 @@ namespace ImageViewer.Command
 
         public CloseCommand(EditableImageViewModel viewModel)
         {
-            _viewModel = viewModel;
+            this.viewModel = viewModel;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -10,10 +11,10 @@ namespace ImageViewer.Command
 {
     class OpenCommand:ICommand
     {
-        private readonly EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel viewModel;
         public OpenCommand(EditableImageViewModel viewModel)
         {
-            _viewModel = viewModel;
+            this.viewModel = viewModel;
         }
         public bool CanExecute(object parameter)
         {
@@ -22,7 +23,7 @@ namespace ImageViewer.Command
 
         public void Execute(object parameter)
         {
-            if (_viewModel.Image != null && _viewModel.Image.IsChanged())
+            if (viewModel.Image != null && viewModel.Image.IsChanged())
             {
                 var result = MessageBox.Show("Do you want open other image without saving?", "Warning",
                     MessageBoxButton.YesNo);
@@ -36,7 +37,8 @@ namespace ImageViewer.Command
                     openDialog.ShowDialog();
                     if (File.Exists(openDialog.FileName))
                     {
-                        _viewModel.Image = new EditableImage(openDialog.FileName);
+                        viewModel.Image = new EditableImage(openDialog.FileName);
+                        viewModel.Image.Rectangle = Rectangle.Empty;
                     }
         }
 

@@ -21,6 +21,13 @@ namespace ImageLibrary.Filters
             GC.Collect();
             return result;
         }
+        public override Bitmap Apply(Bitmap source, Rectangle rectangle)
+        {
+            ComputeResultMatrix();
+            var result = base.Apply(source, rectangle);
+            GC.Collect();
+            return result;
+        }
 
         private void ComputeResultMatrix()
         {

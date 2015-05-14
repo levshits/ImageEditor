@@ -15,7 +15,7 @@
 
     <Grid x:Name="LayoutRoot">
         <ScrollViewer Name="Viewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-            <Image Name="ImageBox" Source="{Binding Image.ImageView, Converter={StaticResource ImageConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" HorizontalAlignment="Center" MouseLeftButtonDown="ImageBox_MouseLeftButtonDown" MouseMove="ImageBox_MouseMove" MouseLeftButtonUp="ImageBox_MouseLeftButtonUp" MouseWheel="ImageBox_MouseWheel">
+            <Image Name="ImageBox" Source="{Binding Image.ImageView, Converter={StaticResource ImageConverter}, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Top" MouseLeftButtonDown="ImageBox_MouseLeftButtonDown" MouseMove="ImageBox_MouseMove" MouseLeftButtonUp="ImageBox_MouseLeftButtonUp" MouseWheel="ImageBox_MouseWheel" d:IsLocked="True">
                 <Image.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>

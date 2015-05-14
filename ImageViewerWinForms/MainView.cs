@@ -6,7 +6,7 @@ namespace ImageViewerWinForms
 {
     public partial class MainView : Form
     {
-        private EditableImage _image;
+        private EditableImage image;
         public MainView()
         {
             InitializeComponent();
@@ -17,8 +17,9 @@ namespace ImageViewerWinForms
             OpenFileDialog openFileDialog = new OpenFileDialog { Filter = "Image Files|*.jpg;*.png;*.gif;*.bmp;" };
             openFileDialog.ShowDialog();
             if(System.IO.File.Exists(openFileDialog.FileName))
-                _image = new EditableImage(openFileDialog.FileName);
-            ImageBox.Image = _image.ImageView;
+                image = new EditableImage(openFileDialog.FileName);
+            ImageBox.EditableImage = image;
+            ImageBox.Image = image.ImageView;
         }
 
         private void ZoomIn_Click(object sender, EventArgs e)
@@ -36,53 +37,64 @@ namespace ImageViewerWinForms
         private void brightnessLevel_ValueChanged(object sender, EventArgs e)
         {
             
-            _image.ChangeBrightness(brightnessLevel.Value);
-            ImageBox.imageBox.Image = _image.ImageView;
+            image.ChangeBrightness(brightnessLevel.Value);
+            ImageBox.Image = image.ImageView;
 
         }
 
         private void contrastLevel_ValueChanged(object sender, EventArgs e)
         {
-            _image.ChangeContrast(contrastLevel.Value);
-            ImageBox.imageBox.Image = _image.ImageView;
+            image.ChangeContrast(contrastLevel.Value);
+            ImageBox.Image = image.ImageView;
         }
 
         private void ColorLevel_ValueChanged(object sender, EventArgs e)
         {
-            _image.ChangeColor(RedLevel.Value, GreenLevel.Value, BlueLevel.Value);
-            ImageBox.imageBox.Image = _image.ImageView;
+            image.ChangeColor(RedLevel.Value, GreenLevel.Value, BlueLevel.Value);
+            ImageBox.Image = image.ImageView;
         }
 
         private void saturationLevel_ValueChanged(object sender, EventArgs e)
         {
-            _image.ChangeSaturation(saturationLevel.Value);
-            ImageBox.imageBox.Image = _image.ImageView;
+            image.ChangeSaturation(saturationLevel.Value);
+            ImageBox.Image = image.ImageView;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_image != null)
+            if (image != null)
             {
-                _image.Save();
+                image.Save();
+                Reset();
             }
         }
 
+        private void Reset()
+        {
+            saturationLevel.Value = 0;
+            contrastLevel.Value = 0;
+            brightnessLevel.Value = 0;
+            RedLevel.Value = 0;
+            GreenLevel.Value = 0;
+            BlueLevel.Value = 0;
+        }
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_image != null)
+            if (image != null)
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog { DefaultExt = "*.jpg", Filter = "jpg|*.jpg;| png|*.png;| bmp|*.bmp;| gif|*.gif;" };
                 saveFileDialog.ShowDialog();
                 if (!System.IO.File.Exists(saveFileDialog.FileName) && saveFileDialog.FileName != "")
                 {
-                    _image.Save(saveFileDialog.FileName);
+                    image.Save(saveFileDialog.FileName);
+                    Reset();
                 }
             }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (_image != null && _image.IsChanged())
+            if (image != null && image.IsChanged())
             {
                 var result = MessageBox.Show("Do you want close program without saving?", "Warning", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
@@ -94,6 +106,17 @@ namespace ImageViewerWinForms
             {
                 Application.Exit();
             }
+        }
+        private void Selection_Click(object sender, EventArgs e)
+        {
+            Reset();
+            ImageBox.SelectionIsActive = true;
+        }
+
+        private void Pan_Click(object sender, EventArgs e)
+        {
+            ImageBox.Image = image.ImageView;
+            ImageBox.SelectionIsActive = false;
         }
     }
 }

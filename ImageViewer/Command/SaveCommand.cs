@@ -6,18 +6,18 @@ namespace ImageViewer.Command
 {
     class SaveCommand:ICommand
     {
-        private readonly EditableImageViewModel _viewModel;
+        private readonly EditableImageViewModel viewModel;
         public bool CanExecute(object parameter)
         {
-            return _viewModel.Image != null && _viewModel.Image.IsChanged();
+            return viewModel.Image != null && viewModel.Image.IsChanged();
         }
 
         public void Execute(object parameter)
         {
-            if (_viewModel.Image != null)
+            if (viewModel.Image != null)
             {
-                _viewModel.Image.Save();
-                _viewModel.Reset();
+                viewModel.Image.Save();
+                viewModel.Reset();
             }
         }
 
@@ -29,7 +29,7 @@ namespace ImageViewer.Command
 
         public SaveCommand(EditableImageViewModel viewModel)
         {
-            _viewModel = viewModel;
+            this.viewModel = viewModel;
         }
     }
 }
